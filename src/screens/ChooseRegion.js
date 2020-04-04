@@ -40,7 +40,7 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
           style={styles.picker}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
         >
-          <Picker.Item key={'not selected'} label={'not selected'} value={'not selected'} />
+          <Picker.Item key={'not selected'} label={'not selected'} value={false} />
           {regions.map(e => <Picker.Item key={e} label={e} value={e} />)}
         </Picker>
         <RegularButton
