@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as Font from 'expo-font';
+import ChooseRegion from './src/screens/ChooseRegion';
 import MenuScreen from './src/screens/MenuScreen';
 import ContactCoordinator from './src/screens/ContactCoordinator';
 import ConvinceFriendsInitial from './src/screens/ConvinceFriends/Initial';
@@ -13,6 +14,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 const MainNavigator = createStackNavigator({
+  ChooseRegion: { screen: ChooseRegion },
   Menu: { screen: MenuScreen },
   GetInvolved: { screen: GetInvolved },
   ConvinceFriendsInitial: { screen: ConvinceFriendsInitial },
