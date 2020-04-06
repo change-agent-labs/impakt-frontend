@@ -55,6 +55,12 @@ export default class App extends Component {
     this.setState({ isReady: true })
   }
   render() {
-    return this.state.isReady ? (<StoreProvider><AppWithNav /></StoreProvider>) : null
+    if (!this.state.isReady) return null // TODO: loading screen
+  
+    return (
+      <StoreProvider>
+        <AppWithNav />
+      </StoreProvider>
+    )
   }
 }
