@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as Font from 'expo-font';
+import { StoreProvider } from './src/helpers/store.js';
 import ChooseRegion from './src/screens/ChooseRegion';
 import MenuScreen from './src/screens/MenuScreen';
 import ContactCoordinator from './src/screens/ContactCoordinator';
@@ -54,6 +55,6 @@ export default class App extends Component {
     this.setState({ isReady: true })
   }
   render() {
-    return this.state.isReady ? (<AppWithNav />) : null
+    return this.state.isReady ? (<StoreProvider><AppWithNav /></StoreProvider>) : null
   }
 }
