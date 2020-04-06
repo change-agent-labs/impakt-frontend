@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Picker, StyleSheet, View } from 'react-native';
+import { useStore } from 'helpers/store.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
 import { RegularButton, RegularText, HeaderYellow } from 'components/shared/basic/index.js'
 
 const ChooseRegion = ({ navigation: { navigate } }) => {
+  const { dispatch } = useStore()
   const [selectedValue, setSelectedValue] = useState(false)
   const regions = [
     'dolnośląskie',
@@ -25,6 +27,11 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
     'zachodniopomorskie'
   ]
 
+  const submit = () => {
+    dispatch({ type: "setRegion", payload: selectedValue })
+    navigate('Menu')
+  }
+
   return (
     <MainLayout>
       <View style={styles.container}>
@@ -44,7 +51,7 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
           {regions.map(e => <Picker.Item key={e} label={e} value={e} />)}
         </Picker>
         <RegularButton
-          action={() => navigate('Menu')}
+          action={submit}
           content="Confirm"
           disabled={!selectedValue}
           style={styles.button}
