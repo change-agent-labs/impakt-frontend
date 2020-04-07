@@ -1,6 +1,19 @@
+import React from 'react'
 import colors from 'constants/colors'
+import { Ionicons } from '@expo/vector-icons'
 
-const navigationOptions = title => {
+const MenuIcon = ({menu}) => {
+  if (!menu) return null
+  return (<Ionicons
+    color={colors.white}
+    name='ios-menu'
+    size={32}
+    onPress={() => alert('This is a button!')}
+    style={{ paddingRight: 20 }}
+  />)
+}
+
+const navigationOptions = (title, menu = true) => {
   return {
     title: title,
     headerStyle: {
@@ -18,6 +31,7 @@ const navigationOptions = title => {
       textTransform: 'uppercase',
       fontWeight: '100',
     },
+    headerRight: <MenuIcon menu={menu} />,
   }
 }
 

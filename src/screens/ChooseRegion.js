@@ -64,7 +64,7 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
   );
 }
 
-ChooseRegion.navigationOptions = navigationOptions()
+ChooseRegion.navigationOptions = navigationOptions('', false)
 
 const styles = StyleSheet.create({
   button: {

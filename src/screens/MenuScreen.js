@@ -31,7 +31,7 @@ const MenuScreen = ({ navigation }) => {
   )
 }
 
-MenuScreen.navigationOptions = navigationOptions()
+MenuScreen.navigationOptions = navigationOptions('', false)
 
 const styles = StyleSheet.create({
   button: {
