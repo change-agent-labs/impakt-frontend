@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import MainLayout from 'components/layouts/MainLayout.js'
 import { RegularButton, RegularText, HeaderYellow } from 'components/shared/basic/index.js'
+import navigationOptions from 'helpers/navigationOptions.js'
 
 const Initial = ({ navigation: { navigate } }) => (
   <MainLayout>
@@ -27,9 +28,7 @@ const Initial = ({ navigation: { navigate } }) => (
   </MainLayout>
 );
 
-Initial.navigationOptions = {
-  title: 'Convince Friends',
-};
+Initial.navigationOptions = navigationOptions('Convince Friends')
 
 const styles = StyleSheet.create({
   button: {

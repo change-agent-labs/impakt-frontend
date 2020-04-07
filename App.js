@@ -24,7 +24,7 @@ const MainNavigator = createStackNavigator({
   NewsEvents: { screen: NewsEvents },
   LocalChat: { screen: LocalChat },
   ContactCoordinator: { screen: ContactCoordinator },
-});
+}, { headerLayoutPreset: 'center' });
 
 const AppWithNav = createAppContainer(MainNavigator);
 

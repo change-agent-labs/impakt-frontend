@@ -1,5 +1,6 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import navigationOptions from 'helpers/navigationOptions.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
 import { ButtonListItem } from 'components/shared/basic/index.js'
@@ -30,9 +31,7 @@ const MenuScreen = ({ navigation }) => {
   )
 }
 
-MenuScreen.navigationOptions = {
-  title: 'Welcome to Menu Screen',
-}
+MenuScreen.navigationOptions = navigationOptions()
 
 const styles = StyleSheet.create({
   button: {

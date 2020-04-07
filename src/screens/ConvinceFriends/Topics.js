@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
+import navigationOptions from 'helpers/navigationOptions.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
 import { ButtonListItem, LargeText } from 'components/shared/basic/index.js'
@@ -68,9 +69,7 @@ const Topics = ({ navigation: { navigate } }) => (
   </MainLayout>
 );
 
-Topics.navigationOptions = {
-  title: 'Convince Friends - Topics',
-};
+Topics.navigationOptions = navigationOptions()
 
 const styles = StyleSheet.create({
   header: {

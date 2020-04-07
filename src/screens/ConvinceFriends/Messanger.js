@@ -4,6 +4,7 @@ import without from 'lodash/without';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 // import { Header } from 'react-navigation-stack';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import navigationOptions from 'helpers/navigationOptions.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
 import { HeaderRegular, DarkButton, YellowButton } from 'components/shared/basic/index.js'
@@ -76,9 +77,7 @@ const Messanger = (props) => {
   )
 }
 
-Messanger.navigationOptions = {
-  title: 'Convince Friends',
-};
+Messanger.navigationOptions = navigationOptions()
 
 const styles = StyleSheet.create({
   container: {

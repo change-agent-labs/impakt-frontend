@@ -4,6 +4,8 @@ import { useStore } from 'helpers/store.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
 import { RegularButton, RegularText, HeaderYellow } from 'components/shared/basic/index.js'
+import navigationOptions from 'helpers/navigationOptions.js'
+import colors from 'constants/colors'
 
 const ChooseRegion = ({ navigation: { navigate } }) => {
   const { dispatch } = useStore()
@@ -62,9 +64,7 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
   );
 }
 
-ChooseRegion.navigationOptions = {
-  title: 'Choose Region',
-};
+ChooseRegion.navigationOptions = navigationOptions()
 
 const styles = StyleSheet.create({
   button: {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   picker: {
     height: 50,
     width: '100%',
-    backgroundColor: '#fff'
+    backgroundColor: colors.white
   },
 });
 
