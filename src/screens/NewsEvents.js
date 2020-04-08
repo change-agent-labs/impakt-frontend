@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Container, Text } from 'native-base';
 import {StyleSheet} from 'react-native';
+import navigationOptions from 'helpers/navigationOptions.js'
 
 class NewsEvents extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome to ProfileScreen',
-  };
   render() {
     const {navigate} = this.props.navigation;
     return (
@@ -16,5 +14,7 @@ class NewsEvents extends React.Component {
     );
   }
 }
+
+NewsEvents.navigationOptions = navigationOptions()
 
 export default NewsEvents;

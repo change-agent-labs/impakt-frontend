@@ -3,7 +3,7 @@ import { Picker, StyleSheet, View } from 'react-native';
 import { useStore } from 'helpers/store.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
-import { RegularButton, RegularText, HeaderYellow } from 'components/shared/basic/index.js'
+import { RegularButton, HeaderYellow } from 'components/shared/basic/index.js'
 import navigationOptions from 'helpers/navigationOptions.js'
 import colors from 'constants/colors'
 
@@ -31,15 +31,12 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
 
   const submit = () => {
     dispatch({ type: "setRegion", payload: selectedValue })
-    navigate('Menu')
+    navigate('MenuScreen')
   }
 
   return (
     <MainLayout>
       <View style={styles.container}>
-        <RegularText>
-          Choose region
-        </RegularText>
         <Picker
           // itemStyle={{ backgroundColor: 'red' }} 
           // itemStyle can be use for iOS. For android only default option is possible,
@@ -64,7 +61,7 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
   );
 }
 
-ChooseRegion.navigationOptions = navigationOptions('', false)
+ChooseRegion.navigationOptions = () => navigationOptions('Choose region', false)
 
 const styles = StyleSheet.create({
   button: {

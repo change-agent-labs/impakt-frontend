@@ -4,6 +4,7 @@ import {TextInput,StyleSheet, View,KeyboardAvoidingView,ScrollView} from 'react-
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
 import { Header } from 'react-navigation-stack';
 
+
 function UselessTextInput(props) {
   return (
     <TextInput

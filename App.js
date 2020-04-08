@@ -18,7 +18,7 @@ import { navigationRef } from 'helpers/rootNavigation.js';
 
 const MainNavigator = createStackNavigator({
   ChooseRegion: { screen: ChooseRegion },
-  Menu: { screen: MenuScreen },
+  MenuScreen: { screen: MenuScreen },
   GetInvolved: { screen: GetInvolved },
   ConvinceFriendsInitial: { screen: ConvinceFriendsInitial },
   ConvinceFriendsTopics: { screen: ConvinceFriendsTopics },

@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { Button, Content, Container, Text } from 'native-base';
 import {StyleSheet, View} from 'react-native';
 import RegionPicker from '../components/RegionPicker';
+import navigationOptions from 'helpers/navigationOptions.js'
 
 class GetInvolved extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome to ProfileScreen',
-  };
   render() {
     const {navigate} = this.props.navigation;
     return (
@@ -29,6 +27,9 @@ class GetInvolved extends React.Component {
     );
   }
 }
+
+GetInvolved.navigationOptions = navigationOptions()
+
 const styles = StyleSheet.create({ 
   text:{
     textTransform:'uppercase',
