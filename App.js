@@ -13,6 +13,7 @@ import LocalChat from './src/screens/LocalChat';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { navigationRef } from 'helpers/rootNavigation.js';
 
 const MainNavigator = createStackNavigator({
   ChooseRegion: { screen: ChooseRegion },
@@ -56,10 +57,10 @@ export default class App extends Component {
   }
   render() {
     if (!this.state.isReady) return null // TODO: loading screen
-  
+
     return (
       <StoreProvider>
-        <AppWithNav />
+        <AppWithNav ref={navigationRef} />
       </StoreProvider>
     )
   }
