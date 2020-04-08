@@ -1,23 +1,28 @@
 import React from 'react'
 import colors from 'constants/colors'
+import constants from 'constants/general'
 import { Ionicons } from '@expo/vector-icons'
+import { useStore } from 'helpers/store.js'
 
-const MenuIcon = ({menu}) => {
-  if (!menu) return null
+const MenuIcon = ({ isMenuVisible }) => {
+  const { state, dispatch } = useStore()
+  if (!isMenuVisible) return null
+  const iconColor = state.menuOpened ? colors.yellow : colors.white
   return (<Ionicons
-    color={colors.white}
+    color={iconColor}
     name='ios-menu'
     size={32}
-    onPress={() => alert('This is a button!')}
+    onPress={() => dispatch({ type: 'toggleMenu' })}
     style={{ paddingRight: 20 }}
   />)
 }
 
-const navigationOptions = (title, menu = true) => {
+const navigationOptions = (title, isMenuVisible = true) => {
   return {
     title: title,
     headerStyle: {
       backgroundColor: colors.brandDark,
+      height: constants.navHeight,
       shadowOpacity: 0,
       shadowOffset: {
         height: 0,
@@ -31,7 +36,7 @@ const navigationOptions = (title, menu = true) => {
       textTransform: 'uppercase',
       fontWeight: '100',
     },
-    headerRight: <MenuIcon menu={menu} />,
+    headerRight: <MenuIcon isMenuVisible={isMenuVisible} />,
   }
 }
 

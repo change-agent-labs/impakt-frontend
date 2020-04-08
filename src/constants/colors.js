@@ -4,4 +4,5 @@ export default {
     gradientDark: '#101028',
     yellow: "#FFED00",
     white: "#FFFFFF",
+    dimmed: '#101028b3',
 }

@@ -10,6 +10,7 @@ import ConvinceFriendsMessanger from './src/screens/ConvinceFriends/Messanger';
 import GetInvolved from './src/screens/GetInvolved';
 import NewsEvents from './src/screens/NewsEvents';
 import LocalChat from './src/screens/LocalChat';
+import MenuModal from './src/components/shared/MenuModal.js'
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -60,6 +61,7 @@ export default class App extends Component {
 
     return (
       <StoreProvider>
+        <MenuModal />
         <AppWithNav ref={navigationRef} />
       </StoreProvider>
     )
