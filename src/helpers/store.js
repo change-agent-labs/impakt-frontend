@@ -1,24 +1,28 @@
 import React, { createContext, useContext, useReducer } from 'react'
 
 const StoreContext = createContext()
-const initialState = { region: null, menuOpened: false }
+const initialState = {
+  region: null,
+  numberOfUsers: Math.floor((Math.random() * 100) + 1),
+  menuOpened: false
+}
+
+const replace = (state, keyToReplace, value) => {
+  let newState = state
+  newState[keyToReplace] = value
+  return {
+    ...newState
+  }
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'setRegion':
-      return {
-        region: action.payload,
-        menuOpened: false,
-      }
+      return replace(state, 'region', action.payload)
     case 'toggleMenu':
-      return {
-        menuOpened: !state.menuOpened,
-      }
+      return replace(state, 'menuOpened', !state.menuOpened)
     case 'reset':
-      return {
-        region: null,
-        menuOpened: false,
-      }
+      return initialState
     default:
       throw new Error(`Unhandled action type: ${action.type}`)
   }
