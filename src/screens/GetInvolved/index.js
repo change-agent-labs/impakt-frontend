@@ -4,10 +4,12 @@ import { StyleSheet, View } from 'react-native'
 import navigationOptions from 'helpers/navigationOptions.js'
 import { useStore } from 'helpers/store.js'
 
+import MainLayout from 'components/layouts/MainLayout.js'
+
 const GetInvolved = ({ navigation: navigate }) => {
   const { state } = useStore()
   return (
-    <Container>
+    <MainLayout>
       <View style={styles.container1}>
         <Button block large style={styles.button} onPress={() => navigate('ContactCoordinator', { name: 'Jane' })}>
           <Text style={styles.text} > contact nearest coordinator</Text>
@@ -22,7 +24,7 @@ const GetInvolved = ({ navigation: navigate }) => {
       <View style={styles.container2}>
         <Text style={styles.text} >{state.region}</Text>
       </View>
-    </Container>
+    </MainLayout>
   )
 }
 
@@ -33,25 +35,18 @@ const styles = StyleSheet.create({
   text: {
     textTransform: 'uppercase',
     textAlign: 'center',
+    color: 'white',
   },
   button: {
     marginTop: 10,
   },
   container1: {
     flex: 5,
-    justifyContent: 'center',
-    borderColor: 'red',
-    borderStyle: 'solid',
-    borderWidth: 8,
-    //alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   container2: {
     flex: 3,
     justifyContent: 'center',
-    borderColor: 'red',
-    borderStyle: 'solid',
-    borderWidth: 8,
-    //alignItems: 'center',
   },
 });
 export default GetInvolved;
