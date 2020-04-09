@@ -3,23 +3,30 @@ import { Button, Content, Container, Text } from 'native-base'
 import { StyleSheet, View } from 'react-native'
 import navigationOptions from 'helpers/navigationOptions.js'
 import { useStore } from 'helpers/store.js'
-
+import { ButtonListItem } from 'components/shared/basic/index.js'
 import MainLayout from 'components/layouts/MainLayout.js'
 
-const GetInvolved = ({ navigation: navigate }) => {
+const GetInvolved = ({ navigation }) => {
+  const { navigate } = navigation
   const { state } = useStore()
   return (
     <MainLayout>
       <View style={styles.container1}>
-        <Button block large style={styles.button} onPress={() => navigate('ContactCoordinator', { name: 'Jane' })}>
-          <Text style={styles.text} > contact nearest coordinator</Text>
-        </Button>
-        <Button block large style={styles.button} onPress={() => navigate('NewsEvents', { name: 'Jane' })}>
-          <Text style={styles.text}  > next event in your area </Text>
-        </Button>
-        <Button large style={styles.button} onPress={() => navigate('LocalChat', { name: 'Jane' })}>
-          <Text style={styles.text} > make friends nearby on the local chat</Text>
-        </Button>
+        <ButtonListItem
+          theme='dark'
+          action={() => navigate('ContactCoordinator')}
+          content={'contact nearest coordinator'}
+        />
+        <ButtonListItem
+          theme='dark'
+          action={() => navigate('NewsEvents')}
+          content={'next event in your area'}
+        />
+        <ButtonListItem
+          theme='dark'
+          action={() => navigate('LocalChat')}
+          content={'make friends nearby on the local chat'}
+        />
       </View>
       <View style={styles.container2}>
         <Text style={styles.text} >{state.region}</Text>
@@ -28,18 +35,9 @@ const GetInvolved = ({ navigation: navigate }) => {
   )
 }
 
-
 GetInvolved.navigationOptions = navigationOptions()
 
 const styles = StyleSheet.create({
-  text: {
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    color: 'white',
-  },
-  button: {
-    marginTop: 10,
-  },
   container1: {
     flex: 5,
     justifyContent: 'flex-start',

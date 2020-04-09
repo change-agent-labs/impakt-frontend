@@ -10,6 +10,8 @@ const CustomButton = ({
   textButtonStyle = {},
   children,
   backgroundColor = colors.brandLight,
+  borderColor = colors.brandLight,
+  borderWidth = 0,
   color = colors.white,
   opacity = 1,
   fontSize = 20,
@@ -25,6 +27,8 @@ const CustomButton = ({
   return (
     <TouchableOpacity style={{
       backgroundColor,
+      borderColor,
+      borderWidth,
       color,
       opacity,
       fontFamily,
