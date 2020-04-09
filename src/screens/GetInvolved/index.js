@@ -1,9 +1,11 @@
-import React from 'react';
-import { Button, Content, Container, Text } from 'native-base';
-import { StyleSheet, View } from 'react-native';
+import React from 'react'
+import { Button, Content, Container, Text } from 'native-base'
+import { StyleSheet, View } from 'react-native'
 import navigationOptions from 'helpers/navigationOptions.js'
+import { useStore } from 'helpers/store.js'
 
 const GetInvolved = ({ navigation: navigate }) => {
+  const { state } = useStore()
   return (
     <Container>
       <View style={styles.container1}>
@@ -18,7 +20,7 @@ const GetInvolved = ({ navigation: navigate }) => {
         </Button>
       </View>
       <View style={styles.container2}>
-        {/* here how many are us in the region */}
+        <Text style={styles.text} >{state.region}</Text>
       </View>
     </Container>
   )
