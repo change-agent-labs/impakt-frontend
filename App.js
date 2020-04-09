@@ -3,11 +3,11 @@ import * as Font from 'expo-font';
 import { StoreProvider } from './src/helpers/store.js';
 import ChooseRegion from './src/screens/ChooseRegion';
 import MenuScreen from './src/screens/MenuScreen';
-import ContactCoordinator from './src/screens/ContactCoordinator';
+import ContactCoordinator from './src/screens/GetInvolved/ContactCoordinator';
 import ConvinceFriendsInitial from './src/screens/ConvinceFriends/Initial';
 import ConvinceFriendsTopics from './src/screens/ConvinceFriends/Topics';
 import ConvinceFriendsMessanger from './src/screens/ConvinceFriends/Messanger';
-import GetInvolved from './src/screens/GetInvolved';
+import GetInvolved from './src/screens/GetInvolved/index.js';
 import NewsEvents from './src/screens/NewsEvents';
 import LocalChat from './src/screens/LocalChat';
 import MenuModal from './src/components/shared/MenuModal.js'
