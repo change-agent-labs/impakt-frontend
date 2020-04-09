@@ -1,13 +1,12 @@
 import React from 'react'
-import { Button, Content, Container, Text } from 'native-base'
 import { StyleSheet, View } from 'react-native'
 import navigationOptions from 'helpers/navigationOptions.js'
 import { useStore } from 'helpers/store.js'
-import { ButtonListItem } from 'components/shared/basic/index.js'
+import { ButtonListItem, HeaderRegular } from 'components/shared/basic/index.js'
 import MainLayout from 'components/layouts/MainLayout.js'
 
-const GetInvolved = ({ navigation }) => {
-  const { navigate } = navigation
+
+const GetInvolved = ({ navigation: { navigate } }) => {
   const { state } = useStore()
   return (
     <MainLayout>
@@ -29,7 +28,8 @@ const GetInvolved = ({ navigation }) => {
         />
       </View>
       <View style={styles.container2}>
-        <Text style={styles.text} >{state.region}</Text>
+        <HeaderRegular style={styles.info}>There {state.numberOfUsers > 1 ? 'are' : 'is'} at least {state.numberOfUsers} of us in:</HeaderRegular>
+        <HeaderRegular style={styles.infoBig}>{state.region}</HeaderRegular>
       </View>
     </MainLayout>
   )
@@ -44,7 +44,12 @@ const styles = StyleSheet.create({
   },
   container2: {
     flex: 3,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+  },
+  info: {
+  },
+  infoBig: {
+    fontSize: 24,
   },
 });
 export default GetInvolved;
