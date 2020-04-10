@@ -1,145 +1,113 @@
 import React, { useState } from 'react'
+import {
+  Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet,
+  TextInput, TouchableWithoutFeedback, View
+} from "react-native";
 import navigationOptions from 'helpers/navigationOptions.js'
 
-import { Button, Container, Text, Form, Textarea, Item, Input, Label, Content } from 'native-base';
-import { TextInput, StyleSheet, View, KeyboardAvoidingView, ScrollView } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
-import { Header } from 'react-navigation-stack';
+import MainLayout from 'components/layouts/MainLayout.js'
+import { RegularButton, RegularText, HeaderYellow } from 'components/shared/basic/index.js'
 
-
-function UselessTextInput(props) {
-  return (
-    <TextInput
-      {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
-      editable
-    />
-  );
-}
-//https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08
 const ContactCoordinator = ({ navigation: { navigate } }) => {
-  const [inputValue, setInputValue] = useState('')
-  const [textAreaValue, setTextAreaValue] = useState('')
+  const [userEmail, setUserEmail] = useState(null)
+  const [optionalMessage, setOptionalMessage] = useState(null)
+  const [confirmationMessage, setConfirmationMessage] = useState(null)
   const [inputStyle, setInputStyle] = useState(styles.input)
   const [coordinatorName] = useState('Matt')
 
-  onChangeText = function (text, source) {
-    if (source === 'input') {
-      setInputValue(text)
-      if (inputStyle == styles.error) {
-        setInputStyle(styles.input)
-      }
-    } else if (source === 'textArea') {
-      setTextAreaValue(text)
+  const onChangeText = (val, type) => {
+    setConfirmationMessage(null)
+    if (type === 'email') {
+      setUserEmail(val)
+      // if (inputStyle == styles.error) {
+      //   setInputStyle(styles.input)
+      // }
+    } else if (type === 'message') {
+      setOptionalMessage(val)
     }
   }
-  onSumbit = function () {
-    //validate email adress or phone number
-    //is email -> contains @
-    //ins number -> contains oonly digits or +
-    console.log('onSubmit')
-    console.log(inputValue)
 
-    if (inputValue === '') {
-      console.log('inputValue-==')
-      setInputStyle(styles.error)
-      console.log('inputStyle', inputStyle)
-      console.log('styles.errror', styles.error)
-    } else {
-      navigate('MenuScreen') //('Confirmation')
-    }
+  const onSumbit = () => {
+    setConfirmationMessage('Your request was sent to the coordinator')
+    setUserEmail(null)
+    setOptionalMessage(null)
   }
+
   return (
-    <ScrollView
-      contentContainerStyle={{
-        flexGrow: 1,
-        borderColor: 'green',
-        borderWidth: 3,
-      }}
-    >
-      {/**https://docs.expo.io/versions/latest/react-native/keyboardavoidingview/ contentContainerStyle works only with behaviour position*/}
-      <KeyboardAvoidingView
-        style={styles.container1}
-        behavior="position"
-        enabled
-        contentContainerStyle={{
-          flexGrow: 1,
-          borderColor: 'red',
-          borderWidth: 3,
-          justifyContent: 'space-around',
-        }}
-      >
+    <MainLayout>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : null}
+          style={styles.flex1}
+        >
+          <View style={styles.flex1}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <View style={styles.inner}>
+                <RegularText>The coordinator in your area is:</RegularText>
+                <RegularText> {coordinatorName}</RegularText>
+                <RegularText>
+                  How would you like them to contact you?
+                </RegularText>
+                <TextInput
+                  style={[inputStyle, styles.form]}
+                  placeholder='emanil or phone number'
+                  onChangeText={val => onChangeText(val, 'email')}
+                  value={userEmail}
+                />
 
-        <Text style={styles.text}> The coordinator in your area is:
-      </Text>
-        <Text style={styles.text}> {coordinatorName}
-        </Text>
-        <Text style={styles.text}>
-          How would you like him to contact you?
-      </Text>
-
-        <TextInput
-          style={[inputStyle, styles.form]}
-          placeholder='emanil or phone number'
-          onChangeText={text => onChangeText(text, 'input')}
-          value={inputValue}
-        />
-
-        <TextInput
-          style={[styles.textArea, styles.form]}
-          multiline
-          numberOfLines={2}
-          onChangeText={text => onChangeText(text, 'textArea')}
-          value={textAreaValue}
-          editable
-          placeholder={`Optional message for ${coordinatorName}`}
-        />
-
-        {/**   <Textarea style={styles.input} bordered rowSpan={2} placeholder="email or phone number" />
-        <Textarea   style={styles.textarea} bordered rowSpan={3} />*/}
-        <Button block large style={styles.button} onPress={() => onSumbit()}>
-          <Text>Submit</Text>
-        </Button>
-
-      </KeyboardAvoidingView>
-    </ScrollView>
-
-  );
+                <TextInput
+                  style={[styles.textArea, styles.form]}
+                  multiline
+                  numberOfLines={2}
+                  onChangeText={val => onChangeText(val, 'message')}
+                  value={optionalMessage}
+                  editable
+                  placeholder={`Optional message for ${coordinatorName}`}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+            <RegularButton
+              action={onSumbit}
+              content='Submit'
+              disabled={!userEmail}
+              style={styles.button}
+            />
+            <HeaderYellow>{confirmationMessage}</HeaderYellow>
+            <View style={styles.flex1} />
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </MainLayout>
+  )
 }
 
 ContactCoordinator.navigationOptions = navigationOptions()
 
 const styles = StyleSheet.create({
+  flex1: {
+    flex: 1,
+  },
+  inner: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
   form: {
-    borderWidth: 1,
     padding: 10,
-    borderColor: 'lightgray',
-    borderBottomColor: 'black'
+    marginTop: 20,
+    backgroundColor: '#fff',
   },
   error: {
     borderColor: '#ff0000',
     borderBottomColor: 'red'
   },
   input: {
-    padding: 5,
-    fontSize: 30,
   },
   textArea: {
-    fontSize: 25,
-  },
-  text: {
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    padding: 10,
   },
   button: {
-    marginTop: 10,
+    marginTop: 30,
   },
-  container1: {
-    flexGrow: 1,
-    borderColor: 'blue',
-    borderWidth: 3,
-    //alignItems: 'center',
-  },
+
 })
 
 export default ContactCoordinator;
