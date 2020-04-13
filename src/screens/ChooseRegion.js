@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Picker, StyleSheet, View } from 'react-native';
+import { Picker, Platform, StyleSheet, View } from 'react-native';
 import { useStore } from 'helpers/store.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
@@ -38,12 +38,9 @@ const ChooseRegion = ({ navigation: { navigate } }) => {
     <MainLayout>
       <View style={styles.container}>
         <Picker
-          // itemStyle={{ backgroundColor: 'red' }} 
-          // itemStyle can be use for iOS. For android only default option is possible,
-          // or it needs to be done with native android styles: 
-          // https://stackoverflow.com/questions/40101451/styling-react-native-picker#44253332
           selectedValue={selectedValue}
-          style={styles.picker}
+          style={Platform.OS === 'android' ? styles.picker : {}}
+          itemStyle={Platform.OS === 'ios' ? { backgroundColor: '#fff' } : {}}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
         >
           <Picker.Item key={'not selected'} label={'not selected'} value={false} />
