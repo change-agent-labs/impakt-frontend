@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
       height: 2
     },
     shadowOpacity: 0.25,
-    elevation: 5
+    elevation: 5,
   },
   menuItem: {
     paddingTop: 10,

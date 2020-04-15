@@ -15,6 +15,8 @@ import MenuModal from './src/components/shared/MenuModal.js'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { navigationRef } from 'helpers/rootNavigation.js';
+import { Platform, View } from 'react-native'
+import constants from './src/constants/general.js'
 
 const MainNavigator = createStackNavigator({
   ChooseRegion: { screen: ChooseRegion },
@@ -61,6 +63,7 @@ export default class App extends Component {
 
     return (
       <StoreProvider>
+        {Platform.OS === 'ios' && <View style={{ height: constants.iOsSystemBarHeight, backgroundColor: '#c2c4cf' }} />}
         <MenuModal />
         <AppWithNav ref={navigationRef} />
       </StoreProvider>

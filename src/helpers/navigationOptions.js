@@ -1,4 +1,6 @@
 import React from 'react'
+import { Platform } from 'react-native';
+
 import colors from 'constants/colors'
 import constants from 'constants/general'
 import { Ionicons } from '@expo/vector-icons'
@@ -20,15 +22,19 @@ const MenuIcon = ({ isMenuVisible }) => {
 const navigationOptions = (title, isMenuVisible = true) => {
   return {
     title: title,
+    headerBackTitle: ' ', // for iOS to avoid display headerBackTitle
     headerStyle: {
       backgroundColor: colors.brandDark,
-      height: constants.navHeight,
+      height: (Platform.OS === 'ios' ? (constants.navHeight - constants.iOsSystemBarHeight) : constants.navHeight),
+      marginTop: (Platform.OS === 'ios' ? - constants.iOsSystemBarHeight : 0),
       shadowOpacity: 0,
       shadowOffset: {
         height: 0,
       },
       shadowRadius: 0,
+      shadowColor: 'transparent',
       elevation: 0,
+      borderBottomWidth: 0,
     },
     headerTintColor: colors.white,
     headerTitleStyle: {
@@ -37,6 +43,7 @@ const navigationOptions = (title, isMenuVisible = true) => {
       fontWeight: '100',
     },
     headerRight: <MenuIcon isMenuVisible={isMenuVisible} />,
+    // headerLeft: <WeMightWantOurCustomBackArrow /> // this might be helpful: https://github.com/react-navigation/react-navigation/issues/779
   }
 }
 
