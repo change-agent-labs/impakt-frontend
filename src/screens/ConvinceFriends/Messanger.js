@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import sample from 'lodash/sample';
 import without from 'lodash/without';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native';
-// import { Header } from 'react-navigation-stack';
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { 
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
 import navigationOptions from 'helpers/navigationOptions.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
 import { HeaderRegular, DarkButton, YellowButton } from 'components/shared/basic/index.js'
-
 
 const Messanger = (props) => {
   const topic = props.navigation.state.params.topic;
@@ -22,57 +28,38 @@ const Messanger = (props) => {
 
   return (
     <MainLayout>
-      <KeyboardAvoidingView behavior={Platform.Os == "ios" ? "padding" : "height"} enabled style={styles.container}>
-        <ScrollView>
-          <HeaderRegular style={styles.header}>
-            {topic.title}
-          </HeaderRegular>
-          <TextInput
-            style={styles.textInput}
-            multiline
-            onChangeText={text => onChangeText(text)}
-            value={value}
-            maxLength={2000}
-          />
-          <DarkButton
-            action={changeDefaultMsg}
-            content='Pick another message'
-          />
-          <YellowButton
-            // action={}
-            content='Send'
-          />
-        </ScrollView>
-      </KeyboardAvoidingView>
-
-      {/* <KeyboardAvoidingView keyboardVerticalOffset={Header.HEIGHT + 20} style={styles.container} behavior="padding" keyboardVerticalOffset={20} > */}
-      {/* <KeyboardAwareScrollView extraHeight={180} style={{ borderWidth: 2, borderColor: 'red' }}>
-          <View style={{ borderWidth: 2, borderColor: 'blue', height: 800 }}>
-            <Text style={styles.text}>
-              Let's convince your friends who value:
-            </Text>
-            <Text style={styles.text}>
-              {topic.title}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              multiline
-              onChangeText={text => onChangeText(text)}
-              value={value}
-              maxLength={2000}
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : null}
+          style={styles.flex1}
+        >
+          <View style={styles.flex1}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <View style={styles.inner}>
+                <HeaderRegular style={styles.header}>
+                  {topic.title}
+                </HeaderRegular>
+                <TextInput
+                  style={styles.textInput}
+                  multiline
+                  onChangeText={text => onChangeText(text)}
+                  value={value}
+                  maxLength={2000}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+            <DarkButton
+              action={changeDefaultMsg}
+              content='Pick another message'
             />
-            <Button block light full large>
-              <Text>Let's do it</Text>
-            </Button>
-            <Button block light full large>
-              <Text>Let's do it</Text>
-            </Button>
-            <Button block light full large>
-              <Text>Let's do it</Text>
-            </Button>
+            <YellowButton
+              // action={}
+              content='Send'
+            />
+            <View style={styles.flex1} />
           </View>
-        </KeyboardAwareScrollView> */}
-      {/* </KeyboardAvoidingView> */}
+        </KeyboardAvoidingView>
+      </ScrollView>
     </MainLayout>
   )
 }
@@ -83,8 +70,13 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1
   },
+  flex1: { flex: 1 },
   header: {
     marginTop: 20,
+  },
+  inner: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
   textInput: {
     flexGrow: 1,
@@ -93,7 +85,8 @@ const styles = StyleSheet.create({
     padding: 20,
     fontSize: 16,
     backgroundColor: '#ffffff',
-    textAlignVertical: 'top'
+    textAlignVertical: 'top',
+    maxHeight: 140,
   },
 });
 
