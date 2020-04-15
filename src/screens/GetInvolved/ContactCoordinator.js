@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import {
-  Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet,
-  TextInput, TouchableWithoutFeedback, View
-} from "react-native";
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 import navigationOptions from 'helpers/navigationOptions.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
@@ -12,22 +18,19 @@ const ContactCoordinator = ({ navigation: { navigate } }) => {
   const [userEmail, setUserEmail] = useState(null)
   const [optionalMessage, setOptionalMessage] = useState(null)
   const [confirmationMessage, setConfirmationMessage] = useState(null)
-  const [inputStyle, setInputStyle] = useState(styles.input)
   const [coordinatorName] = useState('Matt')
 
   const onChangeText = (val, type) => {
     setConfirmationMessage(null)
     if (type === 'email') {
       setUserEmail(val)
-      // if (inputStyle == styles.error) {
-      //   setInputStyle(styles.input)
-      // }
     } else if (type === 'message') {
       setOptionalMessage(val)
     }
   }
 
   const onSumbit = () => {
+    // TODO - send the message with email
     setConfirmationMessage('Your request was sent to the coordinator')
     setUserEmail(null)
     setOptionalMessage(null)
@@ -49,16 +52,16 @@ const ContactCoordinator = ({ navigation: { navigate } }) => {
                   How would you like them to contact you?
                 </RegularText>
                 <TextInput
-                  style={[inputStyle, styles.form]}
+                  style={styles.textInput}
                   placeholder='emanil or phone number'
                   onChangeText={val => onChangeText(val, 'email')}
                   value={userEmail}
                 />
 
                 <TextInput
-                  style={[styles.textArea, styles.form]}
+                  style={[styles.textArea, styles.textInput]}
                   multiline
-                  numberOfLines={2}
+                  numberOfLines={8}
                   onChangeText={val => onChangeText(val, 'message')}
                   value={optionalMessage}
                   editable
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
   },
-  form: {
+  textInput: {
     padding: 10,
     marginTop: 20,
     backgroundColor: '#fff',
@@ -100,14 +103,13 @@ const styles = StyleSheet.create({
     borderColor: '#ff0000',
     borderBottomColor: 'red'
   },
-  input: {
-  },
   textArea: {
+    flexGrow: 1,
+    maxHeight: 120,
   },
   button: {
     marginTop: 30,
   },
-
 })
 
-export default ContactCoordinator;
+export default ContactCoordinator
