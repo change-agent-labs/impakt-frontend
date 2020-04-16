@@ -5,4 +5,5 @@ export default {
     yellow: "#FFED00",
     white: "#FFFFFF",
     dimmed: '#101028b3',
+    alarmRed: '#FF1B59',
 }

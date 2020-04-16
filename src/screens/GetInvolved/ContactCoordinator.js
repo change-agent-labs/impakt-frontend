@@ -12,7 +12,12 @@ import {
 import navigationOptions from 'helpers/navigationOptions.js'
 
 import MainLayout from 'components/layouts/MainLayout.js'
-import { RegularButton, RegularText, HeaderYellow } from 'components/shared/basic/index.js'
+import {
+  ErrorMessage,
+  HeaderYellow,
+  RegularButton,
+  RegularText
+} from 'components/shared/basic'
 
 const ContactCoordinator = ({ navigation: { navigate } }) => {
   const [userContact, setUserContact] = useState(null)
@@ -79,7 +84,7 @@ const ContactCoordinator = ({ navigation: { navigate } }) => {
                 <RegularText>
                   How would you like them to contact you?
                 </RegularText>
-                <HeaderYellow>{errorMessage}</HeaderYellow>
+                <ErrorMessage>{errorMessage}</ErrorMessage>
                 <TextInput
                   style={styles.textInput}
                   placeholder='emanil or phone number'
@@ -125,7 +130,6 @@ const styles = StyleSheet.create({
   },
   textInput: {
     padding: 10,
-    marginTop: 20,
     backgroundColor: '#fff',
   },
   error: {
@@ -135,6 +139,7 @@ const styles = StyleSheet.create({
   textArea: {
     flexGrow: 1,
     maxHeight: 120,
+    marginTop: 20,
   },
   button: {
     marginTop: 30,
