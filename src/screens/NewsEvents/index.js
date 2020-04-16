@@ -2,7 +2,9 @@ import React from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import navigationOptions from 'helpers/navigationOptions.js'
 import { useStore } from 'helpers/store.js'
+// import { ButtonListItem, HeaderRegular } from 'components/shared/basic/index.js'
 import MainLayout from 'components/layouts/MainLayout.js'
+import NewsEventsList from './NewsEventsList.js'
 
 
 const NewsEvents = ({ navigation: { navigate } }) => {
@@ -12,8 +14,7 @@ const NewsEvents = ({ navigation: { navigate } }) => {
       <View style={styles.container1}>
       </View>
       <View style={styles.container2}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        </ScrollView>
+        <NewsEventsList />
       </View>
     </MainLayout>
   )
@@ -24,15 +25,13 @@ NewsEvents.navigationOptions = navigationOptions()
 const styles = StyleSheet.create({
   container1: {
     flex: 2,
-    borderColor: 'red',
-    borderWidth: 1,
     justifyContent: 'flex-start',
   },
   container2: {
     flex: 5,
     marginBottom: 20,
     padding: 10,
-    borderColor: 'green',
+    borderColor: 'white',
     borderWidth: 1,
     justifyContent: 'flex-start',
   },

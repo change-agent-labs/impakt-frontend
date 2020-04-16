@@ -8,7 +8,7 @@ import ConvinceFriendsInitial from './src/screens/ConvinceFriends/Initial';
 import ConvinceFriendsTopics from './src/screens/ConvinceFriends/Topics';
 import ConvinceFriendsMessanger from './src/screens/ConvinceFriends/Messanger';
 import GetInvolved from './src/screens/GetInvolved/index.js';
-import NewsEvents from './src/screens/NewsEvents';
+import NewsEvents from './src/screens/NewsEvents/index.js';
 import LocalChat from './src/screens/LocalChat';
 import MenuModal from './src/components/shared/MenuModal.js'
 

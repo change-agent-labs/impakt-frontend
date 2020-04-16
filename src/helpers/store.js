@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useReducer } from 'react'
+import events from './dummyData/mockedNewsAndEvents.json' // mocking data with https://mockaroo.com/
 
 const StoreContext = createContext()
 const initialState = {
   region: null,
   numberOfUsers: Math.floor((Math.random() * 100) + 1),
-  menuOpened: false
+  menuOpened: false,
+  events: events,
 }
 
 const replace = (state, keyToReplace, value) => {
@@ -18,7 +20,9 @@ const replace = (state, keyToReplace, value) => {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'setRegion':
-      return replace(state, 'region', action.payload)
+      let tempState = replace(
+        state, 'events', events.filter((e) => e.region === action.payload))
+      return replace(tempState, 'region', action.payload)
     case 'toggleMenu':
       return replace(state, 'menuOpened', !state.menuOpened)
     case 'reset':
