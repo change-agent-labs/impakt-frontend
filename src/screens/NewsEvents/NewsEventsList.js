@@ -1,13 +1,17 @@
 import React from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { format, formatDistance, compareAsc } from 'date-fns'
+
 import { useStore } from 'helpers/store.js'
+
+import { FlatList, StyleSheet, View } from 'react-native'
 import { CustomText, HeaderRegular, RegularText } from 'components/shared/basic/index.js'
+
 import colors from 'constants/colors.js'
 
 const ListItem = ({ event }) => (
   <View style={styles.listItem}>
     <View style={styles.row}>
-      <View style={[styles.containerDate, styles.date]}>
+      <View style={styles.containerDate}>
         <Time event={event} />
       </View>
       <View style={styles.containerTitle}>
@@ -22,10 +26,13 @@ const ListItem = ({ event }) => (
 )
 
 const Time = ({ event }) => {
+  const rawDate = new Date(event.date)
+  const formatDate = format(rawDate, 'MM.dd')
+  const formatTime = format(rawDate, 'kk:mm')
   return (
     <View>
-      <CustomText style={styles.date}>{event.date}</CustomText>
-      <CustomText style={styles.date}>{event.time}</CustomText>
+      <CustomText style={styles.date}>{formatDate}</CustomText>
+      <CustomText style={styles.date}>{formatTime}</CustomText>
     </View>
   )
 }
@@ -57,6 +64,7 @@ const styles = StyleSheet.create({
   },
   containerDate: {
     flex: 1,
+    justifyContent: 'center',
   },
   containerTitle: {
     flex: 5,
@@ -70,6 +78,9 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 12,
+    marginTop: 0,
+    marginBottom: 5,
+    fontFamily: 'Exo',
   },
   location: {
     fontFamily: 'Exo',
