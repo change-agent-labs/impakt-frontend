@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
     flex: 5,
     marginBottom: 20,
     padding: 10,
-    borderColor: 'white',
-    borderWidth: 1,
     justifyContent: 'flex-start',
   },
   info: {
