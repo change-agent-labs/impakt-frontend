@@ -4,6 +4,7 @@ import navigationOptions from 'helpers/navigationOptions.js'
 import { useStore } from 'helpers/store.js'
 // import { ButtonListItem, HeaderRegular } from 'components/shared/basic/index.js'
 import MainLayout from 'components/layouts/MainLayout.js'
+import Carousel from './NewsEventsCarousel'
 import NewsEventsList from './NewsEventsList.js'
 
 
@@ -12,6 +13,7 @@ const NewsEvents = ({ navigation: { navigate } }) => {
   return (
     <MainLayout>
       <View style={styles.container1}>
+        <Carousel />
       </View>
       <View style={styles.container2}>
         <NewsEventsList />
