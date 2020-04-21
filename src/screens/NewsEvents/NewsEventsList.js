@@ -1,11 +1,14 @@
 import React from 'react'
 import { format } from 'date-fns'
+import { FlatList, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 
+// helpers:
 import { useStore } from 'helpers/store.js'
 
-import { FlatList, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+// components:
 import { CustomText, HeaderRegular, RegularText } from 'components/shared/basic/index.js'
 
+// constants:
 import colors from 'constants/colors.js'
 
 const ListItem = ({ event, index }) => {

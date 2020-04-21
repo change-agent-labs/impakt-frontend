@@ -2,35 +2,36 @@ import React from 'react'
 import Carousel from 'react-native-snap-carousel'
 import {
   Dimensions,
+  SafeAreaView,
   Text,
   View,
-  SafeAreaView
 } from 'react-native'
+
+// helpers:
+import { useStore } from 'helpers/store.js'
+
+// constants:
 import constants from 'constants/general'
 const { width: screenWidth } = Dimensions.get('window')
 
-import { useStore } from 'helpers/store.js'
 
+const CarouselCard = ({ item, index }) => (
+  <View style={{
+    backgroundColor: 'white',
+    borderRadius: 5,
+    flex: 1,
+    padding: 20,
+    marginLeft: 5,
+    marginRight: 5,
+  }}>
+    <Text style={{ fontSize: 20 }}>{item.title}</Text>
+    <Text>{item.details}</Text>
+  </View>
+)
 
-const MyCarousel = () => {
+const NewsEventsCarousel = () => {
   const { state, dispatch } = useStore()
   const events = state.events
-
-  _renderItem = ({ item, index }) => {
-    return (
-      <View style={{
-        backgroundColor: 'white',
-        borderRadius: 5,
-        flex: 1,
-        padding: 20,
-        marginLeft: 5,
-        marginRight: 5,
-      }}>
-        <Text style={{ fontSize: 20 }}>{item.title}</Text>
-        <Text>{item.details}</Text>
-      </View>
-    )
-  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -45,13 +46,12 @@ const MyCarousel = () => {
           }}
           data={events}
           sliderWidth={screenWidth - (2 * constants.mainPadding)}
-          itemWidth={screenWidth - (2 * constants.mainPadding) - 80}
-          renderItem={this._renderItem}
+          itemWidth={screenWidth - (2 * constants.mainPadding) - 80} // 80 is to make previous & next event's cards visible 
+          renderItem={CarouselCard}
         />
       </View>
     </SafeAreaView>
   );
 }
 
-
-export default MyCarousel
+export default NewsEventsCarousel
