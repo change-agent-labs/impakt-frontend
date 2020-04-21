@@ -3,27 +3,39 @@ import { format, formatDistance, compareAsc } from 'date-fns'
 
 import { useStore } from 'helpers/store.js'
 
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import { CustomText, HeaderRegular, RegularText } from 'components/shared/basic/index.js'
 
 import colors from 'constants/colors.js'
 
-const ListItem = ({ event }) => (
-  <View style={styles.listItem}>
-    <View style={styles.row}>
-      <View style={styles.containerDate}>
-        <Time event={event} />
+const ListItem = ({ event, index }) => {
+  const { dispatch } = useStore()
+  return (
+    <TouchableWithoutFeedback
+      style={styles.listItem}
+      onPress={
+        () => dispatch({
+          type: 'setFocusedEvent',
+          payload: index
+        })
+      }>
+      <View>
+        <View style={styles.row}>
+          <View style={styles.containerDate}>
+            <Time event={event} />
+          </View>
+          <View style={styles.containerTitle}>
+            <RegularText>{index} - {event.title}</RegularText>
+          </View>
+        </View>
+        <View style={[styles.row, styles.containerLocation]}>
+          <RegularText style={styles.location}>{event.city} </RegularText>
+          <RegularText style={styles.location}>({event.region})</RegularText>
+        </View>
       </View>
-      <View style={styles.containerTitle}>
-        <RegularText>{event.title}</RegularText>
-      </View>
-    </View>
-    <View style={[styles.row, styles.containerLocation]}>
-      <RegularText style={styles.location}>{event.city} </RegularText>
-      <RegularText style={styles.location}>({event.region})</RegularText>
-    </View>
-  </View>
-)
+    </TouchableWithoutFeedback>
+  )
+}
 
 const Time = ({ event }) => {
   const rawDate = new Date(event.date)
@@ -46,7 +58,7 @@ const NewsEventsList = () => {
       <HeaderRegular>news & events</HeaderRegular>
       <FlatList
         data={events}
-        renderItem={({ item }) => <ListItem event={item} />}
+        renderItem={({ item, index }) => <ListItem event={item} index={index} />}
         keyExtractor={(item) => item.id.toString()}
       />
     </View>

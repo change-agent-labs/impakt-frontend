@@ -34,6 +34,7 @@ const MyCarousel = () => {
       <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
         <Carousel
           layout={'default'}
+          firstItem={state.focusedEvent}
           data={events}
           sliderWidth={300}
           itemWidth={300}

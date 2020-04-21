@@ -8,6 +8,7 @@ const initialState = {
   numberOfUsers: Math.floor((Math.random() * 100) + 1),
   menuOpened: false,
   events: orderBy(events, (e) => new Date(e.date), 'asc'),
+  focusedEvent: 1,
 }
 
 const replace = (state, keyToReplace, value) => {
@@ -26,6 +27,8 @@ const reducer = (state, action) => {
       return replace(tempState, 'region', action.payload)
     case 'toggleMenu':
       return replace(state, 'menuOpened', !state.menuOpened)
+    case 'setFocusedEvent':
+      return replace(state, 'focusedEvent', action.payload)
     case 'reset':
       return initialState
     default:
