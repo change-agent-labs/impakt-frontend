@@ -1,5 +1,5 @@
 import React from 'react'
-import { format, formatDistance, compareAsc } from 'date-fns'
+import { format } from 'date-fns'
 
 import { useStore } from 'helpers/store.js'
 
@@ -15,7 +15,7 @@ const ListItem = ({ event, index }) => {
       style={styles.listItem}
       onPress={
         () => dispatch({
-          type: 'setFocusedEvent',
+          type: 'scrollToSlide',
           payload: index
         })
       }>
@@ -25,7 +25,7 @@ const ListItem = ({ event, index }) => {
             <Time event={event} />
           </View>
           <View style={styles.containerTitle}>
-            <RegularText>{index} - {event.title}</RegularText>
+            <RegularText>{event.title}</RegularText>
           </View>
         </View>
         <View style={[styles.row, styles.containerLocation]}>

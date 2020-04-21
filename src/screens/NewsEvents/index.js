@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   container1: {
     flex: 2,
     justifyContent: 'flex-start',
+    marginTop: 15,
   },
   container2: {
     flex: 5,

@@ -8,7 +8,7 @@ const initialState = {
   numberOfUsers: Math.floor((Math.random() * 100) + 1),
   menuOpened: false,
   events: orderBy(events, (e) => new Date(e.date), 'asc'),
-  focusedEvent: 1,
+  nextEvent: 0, // to calculate - write a function for that
 }
 
 const replace = (state, keyToReplace, value) => {
@@ -22,13 +22,17 @@ const replace = (state, keyToReplace, value) => {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'setRegion':
+      // set nextEvent somewhere here
       let tempState = replace(
         state, 'events', orderBy(events.filter((e) => e.region === action.payload), (e) => new Date(e.date), 'asc'))
       return replace(tempState, 'region', action.payload)
     case 'toggleMenu':
       return replace(state, 'menuOpened', !state.menuOpened)
-    case 'setFocusedEvent':
-      return replace(state, 'focusedEvent', action.payload)
+    case 'setEventCarouselRef':
+      return replace(state, 'eventCarouselRef', action.payload)
+    case 'scrollToSlide':
+      state.eventCarouselRef.snapToItem(action.payload)
+      return state
     case 'reset':
       return initialState
     default:

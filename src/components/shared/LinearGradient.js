@@ -1,7 +1,8 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import colors from 'constants/colors.js';
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import colors from 'constants/colors.js'
+import constants from 'constants/general'
 
 const LinearGradientWrapper = ({
   children,
@@ -24,8 +25,8 @@ const LinearGradientWrapper = ({
 const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingLeft: constants.mainPadding,
+    paddingRight: constants.mainPadding,
   },
 });
 
