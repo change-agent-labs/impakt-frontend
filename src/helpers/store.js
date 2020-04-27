@@ -8,7 +8,7 @@ const initialState = {
   numberOfUsers: Math.floor((Math.random() * 100) + 1),
   menuOpened: false,
   events: orderBy(events, (e) => new Date(e.date), 'asc'),
-  nextEvent: 0, // to calculate - write a function for that
+  nextEvent: 0,
 }
 
 replace = (state, keyToReplace, value) => {

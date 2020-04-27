@@ -19,7 +19,6 @@ import constants from 'constants/general'
 const { width: screenWidth } = Dimensions.get('window')
 
 const Counter = ({ event }) => {
-  // display only for focused event!!! TODO
   const date = new Date(event.date)
   const timeNow = new Date()
   return (
