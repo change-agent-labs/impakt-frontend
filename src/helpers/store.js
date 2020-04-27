@@ -11,7 +11,7 @@ const initialState = {
   nextEvent: 0, // to calculate - write a function for that
 }
 
-const replace = (state, keyToReplace, value) => {
+replace = (state, keyToReplace, value) => {
   let newState = state
   newState[keyToReplace] = value
   return {
@@ -19,12 +19,24 @@ const replace = (state, keyToReplace, value) => {
   }
 }
 
+findNextEventIndex = (eventsInRegion) => {
+  const now = new Date
+  return eventsInRegion.findIndex((e) => (new Date(e.date) > now))
+}
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'setRegion':
-      // set nextEvent somewhere here
-      let tempState = replace(
-        state, 'events', orderBy(events.filter((e) => e.region === action.payload), (e) => new Date(e.date), 'asc'))
+      // find & order all events in region:
+      const eventsInRegion = orderBy(
+        events.filter(
+          (e) => e.region === action.payload
+        ), (e) => new Date(e.date), 'asc')
+      // add events to the state:
+      let tempState = replace(state, 'events', eventsInRegion)
+      // find and add next coming event
+      tempState = replace(tempState, 'nextEvent', findNextEventIndex(eventsInRegion))
+      tempState = replace(tempState, 'activeSlideIndex', findNextEventIndex(eventsInRegion))
       return replace(tempState, 'region', action.payload)
     case 'toggleMenu':
       return replace(state, 'menuOpened', !state.menuOpened)
@@ -33,7 +45,9 @@ const reducer = (state, action) => {
     case 'scrollToSlide':
       state.eventCarouselRef.snapToItem(action.payload)
       return state
-    case 'reset':
+    case 'setActiveSlideIndex':
+      return replace(state, 'activeSlideIndex', action.payload)
+    case 'reset': 
       return initialState
     default:
       throw new Error(`Unhandled action type: ${action.type}`)
